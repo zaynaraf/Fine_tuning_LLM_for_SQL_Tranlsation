@@ -8,7 +8,8 @@ This report summarizes the recorded Spider dev evaluation outputs from the compl
 | --- | --- |
 | Base model | `Qwen/Qwen2.5-Coder-1.5B-Instruct` |
 | Fine-tuned checkpoint | `qwen_spider_full_sft_v3/` |
-| Fine-tuning data | `2,503` custom chat-format text-to-SQL examples |
+| Fine-tuning data | `2,503` synthetic chat-format text-to-SQL examples generated with generative AI |
+| Experiment framing | Larger generative model as teacher, smaller open model as fine-tuned student |
 | Training split | 90% train / 10% validation |
 | Evaluation benchmark | Spider dev |
 | Evaluation method | Official Spider evaluator, `--etype all` |
@@ -24,7 +25,7 @@ The fine-tuned checkpoint and Spider evaluator workspace are intentionally ignor
 
 ## Interpretation
 
-The fine-tuned model improved exact match by about `+3.1` points and execution accuracy by about `+1.5` points on Spider dev. The improvement is modest, but the project demonstrates the important applied workflow: preparing a custom text-to-SQL dataset, prompt-masked supervised fine-tuning, deterministic inference, baseline comparison, and benchmark evaluation.
+The fine-tuned model improved exact match by about `+3.1` points and execution accuracy by about `+1.5` points on Spider dev. The improvement is modest but promising for a synthetic-data experiment: it suggests that a generative model can be used as a teacher to create useful domain-specific fine-tuning data for a smaller open model, as long as the workflow includes prompt-masked SFT, deterministic inference, baseline comparison, and benchmark evaluation.
 
 ## Raw Artifacts
 

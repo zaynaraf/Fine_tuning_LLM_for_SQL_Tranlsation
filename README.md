@@ -1,18 +1,19 @@
 # Text-to-SQL Fine-Tuning with Qwen2.5-Coder
 
-Portfolio project demonstrating a complete text-to-SQL fine-tuning workflow: custom dataset preparation, supervised fine-tuning, inference, and Spider-style evaluation.
+Portfolio project demonstrating a complete text-to-SQL fine-tuning workflow: synthetic dataset generation with generative AI, supervised fine-tuning, inference, and Spider-style evaluation.
 
 The trained checkpoint is intentionally not committed. This repository is meant to show the workflow, methodology, dataset format, and recorded evaluation results without shipping large model weights.
 
 ## Project Summary
 
-This project fine-tunes `Qwen/Qwen2.5-Coder-1.5B-Instruct` on a custom chat-format text-to-SQL dataset and evaluates transfer performance on the Spider dev benchmark.
+This project explores an LLM-as-teacher setup: a larger generative AI system was used to create a synthetic text-to-SQL dataset, then `Qwen/Qwen2.5-Coder-1.5B-Instruct` was fine-tuned on that dataset and evaluated for transfer performance on the Spider dev benchmark.
 
 | Area | Details |
 | --- | --- |
 | Task | Natural language to SQL generation |
 | Base model | `Qwen/Qwen2.5-Coder-1.5B-Instruct` |
-| Dataset | `2,503` custom examples in chat JSONL format |
+| Dataset | `2,503` synthetic examples generated with generative AI and stored in chat JSONL format |
+| Experiment idea | Use a stronger generative model as a teacher to create fine-tuning data for a smaller open model |
 | Training style | Supervised fine-tuning with prompt masking |
 | Split used | 90% train / 10% validation |
 | External evaluation | Spider dev, official evaluator output recorded in notebook |
@@ -28,7 +29,7 @@ These metrics come from completed notebook runs already present in the project a
 | Base Qwen2.5-Coder | 34.4% | 27.9% |
 | Fine-tuned v3 | 35.9% | 31.0% |
 
-The fine-tuned model improved exact match by about `+3.1` points and execution accuracy by about `+1.5` points on Spider dev. The result is modest but useful for a portfolio project because it demonstrates the full fine-tuning/evaluation loop, not just prompting.
+The fine-tuned model improved exact match by about `+3.1` points and execution accuracy by about `+1.5` points on Spider dev. The result is modest but promising for a synthetic-data experiment because it shows that generative-AI-created training data can move a smaller open model in the right direction when paired with a proper fine-tuning and evaluation loop.
 
 ## Repository Layout
 
@@ -87,17 +88,22 @@ One implementation note: the recorded v3 run used a validation split, but its `e
 
 ## CV Description
 
+**Project name**
+
+Synthetic Teacher-to-Student Text-to-SQL Fine-Tuning
+
 **Short project description**
 
-Fine-tuned `Qwen2.5-Coder-1.5B-Instruct` for text-to-SQL generation using a custom 2.5k-example SQL dataset, implemented prompt-masked supervised fine-tuning, and evaluated transfer performance with Spider-style exact match and execution accuracy.
+Fine-tuned `Qwen2.5-Coder-1.5B-Instruct` for text-to-SQL generation using a 2.5k-example synthetic dataset generated with generative AI, implemented prompt-masked supervised fine-tuning, and evaluated transfer performance with Spider-style exact match and execution accuracy.
 
 **CV bullet**
 
-- Fine-tuned a Qwen2.5-Coder LLM for text-to-SQL generation on a custom 2,503-example dataset, implemented supervised fine-tuning with prompt masking, and evaluated with Spider execution accuracy and exact-match metrics.
+- Built a synthetic-data text-to-SQL fine-tuning experiment by using generative AI to create a 2,503-example training set, fine-tuning `Qwen2.5-Coder-1.5B-Instruct` with prompt-masked SFT, and evaluating transfer performance on Spider dev.
 
 ## What This Demonstrates
 
 - Preparing chat-format fine-tuning data for an instruction-tuned code model.
+- Using generative AI as a teacher to bootstrap a domain-specific fine-tuning dataset.
 - Correctly masking prompt tokens so the model learns the assistant SQL response.
 - Running and documenting model inference after fine-tuning.
 - Comparing a base model against a fine-tuned checkpoint.
