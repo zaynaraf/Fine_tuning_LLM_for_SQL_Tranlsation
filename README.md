@@ -1,6 +1,6 @@
 # Text-to-SQL Fine-Tuning with Qwen2.5-Coder
 
-Portfolio project demonstrating a complete text-to-SQL fine-tuning workflow: synthetic dataset generation with generative AI, supervised fine-tuning, inference, and Spider-style evaluation.
+A Project demonstrating a complete text-to-SQL fine-tuning workflow: synthetic dataset generation with generative AI, supervised fine-tuning, inference, and Spider-style evaluation.
 
 The trained checkpoint is intentionally not committed. This repository is meant to show the workflow, methodology, dataset format, and recorded evaluation results without shipping large model weights.
 
@@ -86,25 +86,3 @@ To fully reproduce evaluation, a reviewer would need to download Spider, restore
 
 One implementation note: the recorded v3 run used a validation split, but its `eval_steps=200` was larger than the `108` optimizer-step training run. For future reruns, the polished workflow notebook recommends epoch-level evaluation so validation loss is always recorded.
 
-## CV Description
-
-**Project name**
-
-Synthetic Teacher-to-Student Text-to-SQL Fine-Tuning
-
-**Short project description**
-
-Fine-tuned `Qwen2.5-Coder-1.5B-Instruct` for text-to-SQL generation using a 2.5k-example synthetic dataset generated with generative AI, implemented prompt-masked supervised fine-tuning, and evaluated transfer performance with Spider-style exact match and execution accuracy.
-
-**CV bullet**
-
-- Built a synthetic-data text-to-SQL fine-tuning experiment by using generative AI to create a 2,503-example training set, fine-tuning `Qwen2.5-Coder-1.5B-Instruct` with prompt-masked SFT, and evaluating transfer performance on Spider dev.
-
-## What This Demonstrates
-
-- Preparing chat-format fine-tuning data for an instruction-tuned code model.
-- Using generative AI as a teacher to bootstrap a domain-specific fine-tuning dataset.
-- Correctly masking prompt tokens so the model learns the assistant SQL response.
-- Running and documenting model inference after fine-tuning.
-- Comparing a base model against a fine-tuned checkpoint.
-- Presenting evaluation results honestly without committing large model artifacts.
