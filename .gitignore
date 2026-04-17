@@ -15,8 +15,12 @@ nltk_punkt_data/
 .ipynb_checkpoints/
 spider_data/
 spider_official_eval/
+qwen_spider_full_ft/
 qwen_spider_full_sft_v2/
 qwen_spider_full_sft_v3/
+checkpoint-*/
+*.safetensors
+pytorch_model.bin
 spider_data.zip
 gradio_templates/
 streamlit_templates/
